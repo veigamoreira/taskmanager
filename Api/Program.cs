@@ -1,3 +1,4 @@
+using Api.Middlewares;
 using Application.Interfaces;
 using Application.Mapping;
 using Application.Services;
@@ -9,8 +10,18 @@ using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configuração do Serilog
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+    .Enrich.FromLogContext()
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 // EF Core InMemory
 builder.Services.AddDbContext<TaskDbContext>(opt =>
@@ -29,6 +40,7 @@ builder.Services.AddAutoMapper(cfg =>
 
 
 builder.Services.AddControllers()
+
     .AddFluentValidation(fv =>
     {
         fv.RegisterValidatorsFromAssemblyContaining<TaskDtoValidator>();
@@ -73,6 +85,7 @@ builder.Services.AddSwaggerGen(c =>
     }
 });
 var app = builder.Build();
+app.UseMiddleware<RequestResponseLoggingMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
