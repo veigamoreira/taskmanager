@@ -81,6 +81,35 @@ TaskManager.slnx
  ├── Domain
  ├── Infrastructure
  └── Tests
+
+
+
+ ## 🔒 Branch Policy
+
+Para garantir qualidade e estabilidade do código, adotamos a seguinte política de branches:
+
+- **main**  
+  - Branch protegida.  
+  - Não é permitido realizar commits ou push direto.  
+  - Alterações só entram via Pull Request (PR) aprovado.  
+  - Representa sempre a versão estável e pronta para produção.
+
+- **develop**  
+  - Branch aberta para desenvolvimento.  
+  - Pode ser clonada e utilizada para criar novas features.  
+  - Após conclusão, as alterações devem ser submetidas via Pull Request para revisão e aprovação antes de serem mescladas na `main`.
+
+### Fluxo recomendado
+1. Criar branch a partir de `develop` (ex: `feature/task-crud`).  
+2. Implementar e testar a funcionalidade.  
+3. Abrir Pull Request para `develop`.  
+4. Após revisão e aprovação, merge para `develop`.  
+5. Quando estável, abrir Pull Request de `develop` → `main`.  
+6. Merge para `main` somente após aprovação.
+
+Esse fluxo garante organização, rastreabilidade e evita que código instável chegue à produção.
+
+
 🔮 Futuras melhorias
 Autenticação e autorização (JWT).
 
