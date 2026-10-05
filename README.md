@@ -1,6 +1,3 @@
-# taskmanager
-# taskmanager
-# taskmanager
 📘 TaskManager API
 🚀 Sobre o projeto
 O TaskManager API é uma aplicação desenvolvida em .NET 10 utilizando solução no formato .slnx (Solution Filter), que permite organizar múltiplos projetos dentro da mesma solução de forma escalável.
